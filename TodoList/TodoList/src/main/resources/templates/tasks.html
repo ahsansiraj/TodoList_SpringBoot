@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task List</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Task List</h2>
+
+  <!-- Add Task Form -->
+  <form th:action="@{/addTask}" method="post" class="mb-4">
+    <div class="form-row align-items-center">
+      <div class="col-md-8">
+        <input type="text" name="taskName" class="form-control" placeholder="Enter task name" required>
+      </div>
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-primary btn-block">Add Task</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Task List Table -->
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Task Name</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+      <td th:text="${task.id}"></td>
+      <td th:text="${task.name}"></td>
+      <td>
+                <span th:text="${task.status} ? 'Completed' : 'Incomplete'"
+                      class="badge"
+                      th:classappend="${task.status} ? 'badge-success' : 'badge-warning'"></span>
+      </td>
+      <td>
+        <!-- Toggle Button -->
+        <!-- Toggle Button -->
+        <form th:action="@{/{id}/toggle(id=${task.id})}" method="get" style="display: inline;">
+          <button type="submit" class="btn btn-sm btn-info">Mark as Complete</button>
+        </form>
+
+        <!-- Delete Button -->
+        <form th:action="@{/{id}/deleteTask(id=${task.id})}" method="post" style="display: inline;"
+              onsubmit="return confirm('Are you sure you want to delete this task?');">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
