@@ -36,3 +36,19 @@ A simple and efficient To-Do List application built using Spring Boot, designed 
 git clone https://github.com/ahsansiraj/TodoList_SpringBoot.git
 cd TodoList_SpringBoot
 ```
+2️⃣ Configure Database
+Open src/main/resources/application.properties and update the database credentials:
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/todo_db
+spring.datasource.username=root
+spring.datasource.password=yourpassword
+spring.jpa.hibernate.ddl-auto=update
+```
+
+🎯 Future Enhancements
+🚀 User authentication (JWT).
+🚀 Task priority & deadline features.
+🚀 Docker containerization.
+
+🤝 Contributing
+Contributions are welcome! Feel free to fork the repository and submit a pull request.🤝 Contributing
